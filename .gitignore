@@ -1,0 +1,11 @@
+# NetBeans & Build Files
+/build/
+/dist/
+/nbproject/private/
+*.class
+*.jar
+
+# System Files
+.idea/
+.vscode/
+*.DS_Store
