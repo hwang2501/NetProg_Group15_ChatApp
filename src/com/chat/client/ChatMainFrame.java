@@ -17,6 +17,7 @@ public class ChatMainFrame extends javax.swing.JFrame {
      */
     public ChatMainFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -28,21 +29,81 @@ public class ChatMainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listOnlineUsers = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtChatContent = new javax.swing.JTextArea();
+        txtMessage = new javax.swing.JTextField();
+        btnSend = new javax.swing.JButton();
+        btnSendFile = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jScrollPane1.setViewportView(listOnlineUsers);
+
+        txtChatContent.setEditable(false);
+        txtChatContent.setColumns(20);
+        txtChatContent.setRows(5);
+        jScrollPane2.setViewportView(txtChatContent);
+
+        btnSend.setText("Gửi");
+        btnSend.addActionListener(this::btnSendActionPerformed);
+
+        btnSendFile.setText("Gửi File");
+        btnSendFile.addActionListener(this::btnSendFileActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSend)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSendFile)))
+                .addGap(114, 194, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSend)
+                    .addComponent(btnSendFile))
+                .addContainerGap(173, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+        String msg = txtMessage.getText().trim();
+    if (!msg.isEmpty()) {
+        // TODO (Hoàng): Mã hóa AES và gửi qua Socket Port 5000
+        txtChatContent.append("Tôi: " + msg + "\n");
+        txtMessage.setText("");
+    }//GEN-LAST:event_btnSendActionPerformed
+    }
+    private void btnSendFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendFileActionPerformed
+        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+    if (fileChooser.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION) {
+        java.io.File selectedFile = fileChooser.getSelectedFile();
+        // TODO (Dương): Gửi file qua Socket Port 5001
+        txtChatContent.append("[Hệ thống] Đang gửi file: " + selectedFile.getName() + "...\n");
+    }
+    }//GEN-LAST:event_btnSendFileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +131,12 @@ public class ChatMainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSend;
+    private javax.swing.JButton btnSendFile;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> listOnlineUsers;
+    private javax.swing.JTextArea txtChatContent;
+    private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables
 }

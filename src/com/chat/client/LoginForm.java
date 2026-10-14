@@ -28,21 +28,93 @@ public class LoginForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtUsername = new javax.swing.JLabel();
+        txtIP = new javax.swing.JLabel();
+        txtPort = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        btnLogin = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtUsername.setText("Tên người dùng");
+
+        txtIP.setText("Địa chỉ IP");
+
+        txtPort.setText("Port");
+
+        btnLogin.setText("Đăng nhập");
+        btnLogin.addActionListener(this::btnLoginActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUsername)
+                    .addComponent(txtIP)
+                    .addComponent(txtPort))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLogin)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                        .addComponent(jTextField2)
+                        .addComponent(jTextField3)))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUsername)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtIP)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPort)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addComponent(btnLogin)
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        String username = txtUsername.getText().trim();
+    String ip = txtIP.getText().trim();
+    String portStr = txtPort.getText().trim();
+
+    if (username.isEmpty() || ip.isEmpty() || portStr.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Vui lòng nhập đầy đủ Tên, IP và Port!", 
+            "Thông báo", 
+            javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    try {
+        int port = Integer.parseInt(portStr);
+        // Mở màn hình ChatMainFrame
+        ChatMainFrame mainFrame = new ChatMainFrame();
+        mainFrame.setVisible(true);
+        this.dispose(); // Đóng cửa sổ Login
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Port phải là số nguyên!", 
+            "Lỗi", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +142,12 @@ public class LoginForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel txtIP;
+    private javax.swing.JLabel txtPort;
+    private javax.swing.JLabel txtUsername;
     // End of variables declaration//GEN-END:variables
 }
